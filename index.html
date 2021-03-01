@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sherry Ma </title>
+    <link href="style.css" rel ="stylesheet" type="text/css">
+</head>
+<body>
+    <nav class="w3-bar w3-black">
+      <a href="#home" class="w3-button w3-bar-item">Home</a>
+    </nav>
+    <img class="myHomePic" src="AI_play.jpeg"
+    style="width:100%">
+    <section class="w3-container w3-center w3-content" style="max-width:600px">
+      <h2 class="w3-wide">Abstract</h2>
+      <h2 class="w3-wide">Interactive visualization system of adversarial search algorithm</h2>
+      <p class="w3-opacity"><i>How AI thinks</i></p>
+      <p class="w3-justify">AI games usually have too many algorithms behind them, and its "thinking"
+                            process is complex to get a concrete idea for players. Although there are
+                            many useful adversarial search algorithms right now, it is still too abstract
+                            to connect those complex algorithms with the games we play together. Also,
+                            it is necessary to clarify how the game tree expand while keeping the environment
+                            invariant. This work will design an AI game tree visualization system
+                            that enables flexible visual adversarial search algorithm exploration by allowing
+                            the user to modify AI algorithm parameters, playing against the AI,
+                            and seeing the real-time animation. During the playing procedures, for each
+                            predicted AI step, the system will visualize the game tree and the animation
+                            of its expanding and corresponding AI algorithm's corresponding properties.
+                            The system will deploy a simple game engine for a simple game, connect-4,
+                            and synchronize another interface for the game tree algorithm interactive
+                            animation. With the system, the user can explore to find better properties
+                            (for example, iteration) of the AI algorithm and find a better combination of
+                            optimization methods, evaluation function, and all other
+                            components in adversarial search algorithms. Users could also see the performance
+                            comparison between algorithms, such as the visualization of their win rate changing as the parameters changes. On the other hand, the system could work as a
+                            visualization tool to quickly comprehend complex AI algorithms and be used
+                            as a teaching tool. This paper will introduce how to implement the system
+                            in detail, including three parts: game engine implementation, game tree algorithms,
+                            interactive and real-time interactive animation, and comparison visualization.</p>
+      <h2 class="w3-wide">Author Information</h2>
+      <p class="w3-justify">Author: Sherry/Xueran Ma</p>
+      
+    </section>
+    
+    <!-- Overview -->
+    <section class="w3-container w3-center w3-content" style="max-width:600px">
+    <h2 class="w3-wide">Overview</h2>
+    <p class="w3-justify">Will explain the pics and UI components below</p>
+    </section>
+    <section class="w3-row-padding w3-center w3-light-grey">
+      <article class="w3-half">
+        <p>Game Board(fig1)</p>
+        <img src="UI.png" alt="game" style="width:100%">
+      </article>
+      <article class="w3-half">
+        <p>MiniMax Game tree animation (fig2)</p>
+        <img src="vis_guide.png" alt="vis" style="width:100%">
+      </article>
+    </section>
+    </section>
+    <section class="w3-row-padding w3-center w3-light-grey">
+      <article class="w3-half">
+        <p>Monto Carlo Animation(fig3)</p>
+        <img src="monto_vis.png" alt="game" style="width:100%">
+      </article>
+      <article class="w3-half">
+        <p>Alpha Beta Animation(fig4)</p>
+        <img src="alpha_vis.png" alt="vis" style="width:100%">
+      </article>
+    </section>
+    <section class="w3-container w3-center w3-content" style="max-width:1000px;color:blue;">
+      <h2 class="w3-wide">The whole project includes two software: 1. a playable and interactive game system with self-designed UI and animation  2. Visualizations of comparison (such as winrate and parameters) between algorithms using notebook. See details(user guides) and links to the softwares below </h2>
+    </section>
+    
+    <section class="w3-container w3-center w3-content" style="max-width:600px">
+      <h2 class="w3-wide">Links</h2>
+      <a href="abstract&related_work.pdf">Draft(just placeholder, not yet done, will submit two weeks earlier than deadline)</a>
+      <p class="w3-justify">In source folder, 1. Game system: game is executable file (pls wait several mins to lauch the canvas), game.py is the source file</p>
+      <p class="w3-justify">2. Comparison visualization notebook: Performance_Comparison.ipynb, could open using jupyter notebook or google colab</p>
+      <a href="visGameTree">Source Folder</a>
+    </section>
+
+    <section class="w3-container w3-center w3-content" style="max-width:600px">
+      <h2 class="w3-wide">Game System User Guide(game exe file)</h2>
+      <p class="w3-justify">Click Game executation file to start the app but please wait around several mins to launch.</p>
+      <p class="w3-justify">1. Two modes: there are two modes for each algorithm: play mode and tutorial mode, tutorial mode has visualization functions thus it has limitations on the parameters of algorithms, play mode trades off visualization function for more complex and smarter AI (for example, higher simulation iteration or deeper depth)</p>
+      <p class="w3-justify">2. Algorithms and their modifiable parameters:</p>
+      <p class="w3-justify">Monto Carlo: iteration for its simulation stage, factor inside UTC formula </p>
+      <p class="w3-justify">MiniMax and Alpha-Beta: both algorithms have parameters -- the maximum depth, evaluation function(there are two choices, will introduce below) </p>
+      <p class="w3-justify">Random: For comparison, will randomly select next move, no parameters </p>
+      <p class="w3-justify">3. UI explaination</p>
+      <p class="w3-justify">As fig1, the 7 numbers on board show the AI prediction for its each step -- MiniMax and Alpha Beta will show its uitility(simple evaluation and advanced evaluation will differ, see details below at Advanced Heuristic and Evaluation Function part). Monto Carlo will show UTC score </p>
+      <p class="w3-justify">As fig2/3/4, Below is animation guide </p>
+      <img src="animation_guide.png" alt="animation" style="width:100%">
+    </section>
+
+
+
+      <section class="w3-container w3-center w3-content" style="max-width:600px">
+      <h2 class="w3-wide">Comparison Visualization User Guide(Comparison.ipynb)</h2>
+      <p class="w3-justify">Notebook </p>
+      <p class="w3-justify">Monto Carlo VS Random Player: CPU times: user 19min 39s, sys: 3.95 s, total: 19min 43s Wall time: 43min 4s </p>
+      <p class="w3-justify">Monto Carlo VS MiniMax: CPU times: user 40min 13s, sys: 8.67 s, total: 40min 21s
+Wall time: 1h 20min 51s </p>
+      <p class="w3-justify">Monto Carlo VS Monto Carlo: CPU times: user 1h 25min 25s, sys: 28.4 s, total: 1h 25min 53s
+Wall time: 2h 8min 24s </p>
+      <p class="w3-justify">Monto Carlo VS Alpha Beta: CPU times: user 45min 33s, sys: 9.19 s, total: 45min 42s
+Wall time: 1h 29min 14s </p>      
+      <img src="winrate_monto.png" alt="mode" style="width:100%">
+      <p class="w3-justify">Alpha Beta VS Random Player: CPU times: user 16min 23s, sys: 2.94 s, total: 16min 26s
+Wall time: 17min 8s</p>
+      <p class="w3-justify">Alpha Beta VS MiniMax: CPU times: user 17min 33s, sys: 2.04 s, total: 17min 35s
+Wall time: 18min 54s</p>
+      <p class="w3-justify">Alpha Beta VS Monto Carlo: CPU times: user 39min 55s, sys: 13.2 s, total: 40min 9s
+Wall time: 2h 25min 13s
+Wall time: 2h 8min 24s </p>
+      <p class="w3-justify">Alpha Beta VS Alpha Beta: CPU times: user 27min 19s, sys: 4.7 s, total: 27min 23s
+Wall time: 27min 50s </p>      
+      <img src="winrate_alpha.png" alt="mode" style="width:100%">
+      <p class="w3-justify">Evaluation Comparison in 50 fights:</p>
+      <p class="w3-justify">Simple evaluation vs Advanced evaluation</p>
+      <p class="w3-justify">Use simple evaluation, win 18 out of 50</p>
+      <p class="w3-justify">Use advanced evaluation, win 22 out of 50</p>
+      <p class="w3-justify">Draw 10 out of 50</p>
+       
+    </section>
+
+
+
+    <section class="w3-container w3-center w3-content" style="max-width:1000px">
+    <h2 class="w3-wide" id="heuristic-and-evaluation-function">Advanced Heuristic and Evaluation Function</h2>
+<p class="w3-justify">Unlike simple evaluation(only can evaluate leaf node, all other node will return 0. Leaf node win get 1 utility, lose -1), I also designed another evalution function which could evaluate also intermediate node and make the AI smarter for MiniMax and Alpha Beta Algorithm. In the connect-4 game, states are all possible boards and the number of actions per state varies from 0 to 7 which depends on how many columns are still available to fill. </p>
+<p class="w3-justify">What heuristic? Why</p>
+<p class="w3-justify">For both the implementations of the alpha-beta search algorithm and minimax search algorithm, I cut off the search at depth(default is 3, which could be modified by the user on the UI page) in order to save the time spent for each round. Consider the use of depth limit, probably the utilities of leaves are not accessible before we cut off the tree, so I use a heuristic evaluation function to compute the estimated desirability of a state, in other words, the estimated value of win at the state. The heuristic evaluation function is described below:</p>
+<p class="w3-justify">1. Initially, for each position inside the board, I compute the number of four connected positions which include that position by hand, and I got the table:</p>
+<pre><code>                      [[<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>],    
+                      [<span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">8</span>, <span class="hljs-number">6</span>, <span class="hljs-number">4</span>], 
+                      [<span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">11</span>, <span class="hljs-number">13</span>, <span class="hljs-number">11</span>, <span class="hljs-number">8</span>, <span class="hljs-number">5</span>], 
+                      [<span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">11</span>, <span class="hljs-number">13</span>, <span class="hljs-number">11</span>, <span class="hljs-number">8</span>, <span class="hljs-number">5</span>],
+                      [<span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>, <span class="hljs-number">8</span>, <span class="hljs-number">6</span>, <span class="hljs-number">4</span>],   
+                      [<span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>]]
+</code></pre></li>
+</ol>
+<p class="w3-justify">  Here are two examples about how to understand the table:    </p>
+<p class="w3-justify">  For the left top position, it has a value of 3 because it has the three possibilities of connecting 4 positions as follows:</p>
+<p class="w3-justify"><img src="eval1.png" alt="alt text"></p>
+<p class="w3-justify">For the first column second-row position, it has a value of 4 because it has the four possibilities of connecting 4 positions as follows:</p>
+<p class="w3-justify"><img src="eval2.png" alt="alt text"></p>
+<p class="w3-justify"> In the same way, I got the whole table.
+    Sum up the table, the value is 138. </p>
+<p class="w3-justify"> I would like to compute the evaluation of each state so that it could estimate how close the current state is to win. Obviously, when the next state has more possibilities of connecting 4 positions, then the estimation of the future is more optimistic. 
+So initial evaluation function will sum up the total number of possible four connected positions for all the current player’s positions and minus up the total number of possible four connected positions for all the opponent’s positions.</p>
+<pre><code>Eval = (value[position] for each current player’s position of current board) -</code></pre>
+ <pre><code>(value[position] for each opponent’s position of current board)</code></pre>
+<p class="w3-justify"> Here value[position] is the value at a position of the table given above. 
+ However, the table values need some other extensions, as follows.</p>
+
+<p class="w3-justify">2. Block opponent and Form 4 connected</p>
+<p class="w3-justify">However, before computing the value as above, we need to check if the current board state has any connected 4 positions whatever for the opponent or the current player. So inside the evaluation, firstly, I check the current board, if any connected4 exist, whatever for the opponent or current player, evaluation function return what the check function return, the check function is as followings:</p>
+</li>
+</ol>
+<p class="w3-justify">a. If the opponent has 4 connected position, check function return -1000</p>
+<p class="w3-justify">b.    If the current player has 4 connected position, return 1000</p>
+<p class="w3-justify">c.    Otherwise, just return 0, which means no connected4 found</p>
+<p class="w3-justify">The above check function is also used at alpha_beta_search in order to cut the depth if a connected4 is found at an earlier depth.</p>
+<p class="w3-justify">How do I implement the check function to find the connected4?
+Below is a simple sketch of four possible solutions, 4 connected positions could form lines to the right, down, and diagonal up and to right, down, and to the right. So inside the picture, the positions inside the green rectangle are those possible positions that could form lines of 4 directions separately. Implementations could just iterate through those positions.</p>
+<p class="w3-justify"><img src="eval3.png" alt="alt text"></p>
+
+
+    
+
+    
+    
+</body>
+
+</html>
